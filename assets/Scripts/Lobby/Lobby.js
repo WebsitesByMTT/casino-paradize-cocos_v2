@@ -181,6 +181,10 @@ cc.Class({
     default: null,
     type: cc.Button, 
   }, 
+  smallSpin:{
+    default: null,
+    type: cc.Node
+  }
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -210,15 +214,15 @@ cc.Class({
     });
     cc.tween(this.cloudAnimNode).repeatForever(moveItem).start();
     // cc.tween(this.cloudAnimNode).repeatForever(moveItem).start();
-    this.moneySprite._tween = cc.tween(this.moneySprite)
-            .repeatForever(cc.tween().to(1, { angle: -360 }))
-            .start();
-    cc.tween(this.moneySprite).repeatForever(cc.tween().to(1, { angle: -360 })).start();
+    // this.moneySprite._tween = cc.tween(this.moneySprite)
+    //         .repeatForever(cc.tween().to(1, { angle: -360 }))
+    //         .start();
     this.getUserDetails();
     this.fetchGames(this.category);
     this.currentPage = 0;
     this.schedule(this.autoScrollPageView, this.scrollInterval);
     this.setUpPageviewEvent();
+    this.rotationSpeed = 180;
   },
 
   setUpPageviewEvent: function(){
@@ -614,7 +618,7 @@ getGamesByCategoryAll: function () {
           this.scrollView.node.width = 2100;
           this.scrollView.node.getChildByName("view").width = 2200;
       }else{
-        this.scrollView.node.width = 1200;
+        this.scrollView.node.width = 1500;
         this.scrollView.node.getChildByName("view").width = 1600;
         
       }
@@ -633,10 +637,10 @@ getGamesByCategoryAll: function () {
           }
           
         }else{
-          const screenWidth = cc.winSize.width - 430;
+          const screenWidth = cc.winSize.width - 350;
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth;
-          this.scrollView.node.setPosition(cc.v2(-800, 0));
+          this.scrollView.node.setPosition(cc.v2(-850, 0));
         }
           this.pageView.node.width = 320;
           // this.pageView.node.getChildByName("view").width = 325;
@@ -684,22 +688,6 @@ getGamesByCategoryAll: function () {
             }
       }
     },
-
-    // onInputFieldFocused: function(event){
-    //   // console.log("eventFocused", event);
-    //   const inputNode = event.node.getComponent(cc.EditBox);
-    //     if (inputNode) {
-    //         inputNode.placeholder = ""; // Remove the placeholder text when focused
-    //     }
-    // },
-
-    // onInputFieldBlurred: function(event){
-    //   const inputNode = event.node.getComponent(cc.EditBox);
-    //     if (inputNode) {
-    //         // inputNode.placeholder = inputNode._placeholderLabel.string; // Restore the placeholder text when blurred
-    //     }
-    // },
-
 
   setupLobbyKeyboardButtonListeners: function() {
     const allKeyboardButtons = this.getAllKeyboardButtons();
@@ -751,6 +739,16 @@ getGamesByCategoryAll: function () {
                 });
             }
         },
+
+        update(dt){
+          if(this.moneySprite){
+            this.moneySprite.angle -= this.rotationSpeed * dt
+          }
+          if(this.smallSpin){
+            this.smallSpin.angle -= this.rotationSpeed * dt
+          }
+        }
+       
 });
 
 

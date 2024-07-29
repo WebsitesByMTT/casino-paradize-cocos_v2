@@ -3,8 +3,8 @@ cc.Class({
 
     properties: {
         spinButton: cc.Button, // Reference to the spin button
-        spinDuration: 12, // Duration of the spin in seconds
-        minRounds: 12, // Minimum number of rounds to spin
+        spinDuration: 10, // Duration of the spin in seconds
+        minRounds: 10, // Minimum number of rounds to spin
         spinWheelAnim:{
             default: null,
             type: cc.Node
@@ -14,6 +14,10 @@ cc.Class({
             type: cc.Node,
         },
         arrowNode: cc.Node, 
+        spinWheelParent:{
+            default: null,
+            type: cc.Node
+        }
     },
 
     onLoad() {
@@ -35,17 +39,17 @@ cc.Class({
         this.isSpinning = true;
 
         // Run the spin animation using cc.tween
-        cc.tween(this.spinWheelAnim)
-            .by(this.spinDuration, { angle: totalAngle }, { easing: 'cubicInOut' })
-            .call(() => {
-                if (this.isSpinning) {
-                    this.isSpinning = false;
-                    // Enable the button after the spin is complete
-                    this.spinButton.interactable = true;
-                    this.onSpinComplete(this.spinWheelAnim.angle);
-                }
-            })
-            .start();
+        this.currentTween = cc.tween(this.spinWheelAnim)
+        .by(this.spinDuration, { angle: totalAngle }, { easing: 'cubicInOut' })
+        .call(() => {
+            if (this.isSpinning) {
+                this.isSpinning = false;
+                // Enable the button after the spin is complete
+                this.spinButton.interactable = true;
+                this.onSpinComplete(this.spinWheelAnim.angle);
+            }
+        })
+        .start();
     },
     onSpinComplete(finalAngle) {
         // Normalize the final angle to be between 0 and 360
@@ -53,7 +57,6 @@ cc.Class({
         if (finalAngle < 0) {
             finalAngle += 360;
         }
-
         // Calculate the angle where the arrow node points
         let arrowWorldPos = this.arrowNode.convertToWorldSpaceAR(cc.v2(0, 0));
         let wheelWorldPos = this.spinWheelAnim.convertToWorldSpaceAR(cc.v2(0, 0));
@@ -90,4 +93,19 @@ cc.Class({
         console.log(this.segments[segmentIndex]._name, "this.segments[segmentIndex]");
         return this.segments[segmentIndex]._name;
     },
+
+    closeSpinNode: function () {
+        console.log("spinWheelAnimspinWheelAnimspinWheelAnim", this.currentTween);
+        if(this.currentTween){
+            this.currentTween.stop();
+            let currentAngle = this.spinWheelAnim.angle;
+            this.spinWheelAnim.angle = currentAngle; // Ensure the wheel stays at its current angle
+        }
+        this.spinButton.interactable = true;
+        // Reset the spinning state
+        this.isSpinning = false;
+        if (this.spinWheelParent.active) {
+          this.spinWheelParent.active = false;
+        }
+    }
 });
