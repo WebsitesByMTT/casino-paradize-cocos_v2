@@ -1,0 +1,70 @@
+# Cocos Creator specific
+# -----------------------
+
+# Build output directories
+build/
+temp/
+library/
+local/
+
+# Cocos Creator specific files
+.project
+.settings/
+*.sublime-workspace
+*.sublime-project
+*.cocos/
+
+# System specific
+# ----------------
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Logs
+*.log
+
+# Node modules
+node_modules/
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE specific
+# ----------------
+
+# VSCode
+.vscode/
+
+# Intellij IDEA
+.idea/
+
+# Other IDEs
+*.swp
+*.swo
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+*.app
+*.meta
+
+
+# Debugger configuration
+*.launch.json
+*.debug/
+
+# Other
+*.tmp
+*.bak
+*.swp
+*.swo
