@@ -185,6 +185,15 @@ cc.Class({
     default: null,
     type: cc.Node
   },
+  indicatorNode:{
+    default: null,
+    type:cc.Node
+  },
+  indicatorSpriteFrame: {
+    default: null,
+    type: cc.SpriteFrame
+  },
+  fullScreenButton: cc.Button,
   normalScreen: cc.SpriteFrame,
   fullScreenSprite : cc.SpriteFrame
   },
@@ -303,6 +312,7 @@ populatePageView: function(featuredItems, gameCategory) {
   let pageViewContent = this.pageView.content;
   for (let i = 0; i < featuredItems.length; i++) {
     if(featuredItems[i].status == "active"){
+      this.drawIndicator(featuredItems.length)
       this.populateItems(featuredItems[i], this.smallItemPrefab, pageViewContent, gameCategory);
     }
   }
@@ -312,6 +322,21 @@ populatePageView: function(featuredItems, gameCategory) {
     if (distance < 10) { // Adjust this threshold as needed
       
     }});
+},
+
+drawIndicator: function(count) {
+  // Assuming you have a node named 'indicatorNode' to hold the indicator sprites
+  // let indicatorNode = this.node.getChildByName('Indicator');
+  // this.indicatorNode.removeAllChildren(); // Clear previous indicators
+
+  // for (let i = 0; i < count; i++) {
+  //     let indicatorSprite = new cc.Node();
+  //     indicatorSprite.addComponent(cc.Sprite);
+  //     // Set your indicator spriteFrame here
+  //     indicatorSprite.getComponent(cc.Sprite).spriteFrame = this.indicatorSpriteFrame;
+  //     indicatorSprite.x = i * (indicatorSprite.width + 10); // Adjust spacing as needed
+  //     indicatorNode.addChild(indicatorSprite);
+  // }
 },
 onTouchStart(event) {
   this.touchStartPos = event.getLocation();
@@ -428,8 +453,11 @@ getGamesByCategoryAll: function () {
 
   // for full Screen
   zoomFullScreenClick: function () {
+
+    console.log(this.fullScreenButton, 'this.fullScreenButton');
     
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) { 
+      this.fullScreenButton.getComponent(cc.Sprite).spriteFrame = this.normalScreen;
       // current working methods
       this.setFullScreenWidth();
       if (document.documentElement.requestFullscreen) {
@@ -442,6 +470,7 @@ getGamesByCategoryAll: function () {
         );
       }
     } else {
+      this.fullScreenButton.getComponent(cc.Sprite).spriteFrame = this.fullScreenSprite;
       this.setFullScreenWidth();
       if (document.cancelFullScreen) {
         document.cancelFullScreen();
@@ -620,18 +649,26 @@ getGamesByCategoryAll: function () {
   },
 
   setFullScreenWidth() {
+    const screenWidth = cc.winSize.width;
     if(!document.fullscreenElement){
       if(!this.pageViewParent.active){
-          this.scrollView.node.setPosition(cc.v2(-1400, 0));
+          // console.log(this.scrollView.node, "his.scrollView.node width check when normal screen with pageview/feature");
+          this.scrollView.node.width = screenWidth;
+          this.scrollView.node.getChildByName("view").width = screenWidth;
+          this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
+          this.scrollView.node.setPosition(cc.v2(-1000, 0));
           // this.scrollView.node.width = 2200;
           // this.scrollView.node.getChildByName("view").width = 2400;
       }else{
-        this.scrollView.node.setPosition(cc.v2(-1100, 0));
+        this.scrollView.node.width = screenWidth;
+        this.scrollView.node.getChildByName("view").width = screenWidth;
+        this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
+        this.scrollView.node.setPosition(cc.v2(-650, 0));
         // this.scrollView.node.width = 1920;
         // this.scrollView.node.getChildByName("view").width = 1920;
-        
+        this.pageView.node.width = 320;
       }
-      this.pageView.node.width = 320;
+     
       // this.pageView.node.getChildByName("view").width = 325;
     } else{      
         if(!this.pageViewParent.active){
@@ -640,18 +677,21 @@ getGamesByCategoryAll: function () {
             // this.scrollView.node.width = 2000;
             // this.scrollView.node.getChildByName("view").width = 2200;
           }else{
-            this.scrollView.node.setPosition(cc.v2(-1400, 0));
-            // this.scrollView.node.width = 2200;
-            // this.scrollView.node.getChildByName("view").width = 2200;
+            this.scrollView.node.width = screenWidth;
+            this.scrollView.node.getChildByName("view").width = screenWidth;
+            this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
+            this.scrollView.node.setPosition(cc.v2(-950, 0));
           }
           
         }else{
-          // const screenWidth = cc.winSize.width - 350;
-          // this.scrollView.node.width = screenWidth;
-          // this.scrollView.node.getChildByName("view").width = screenWidth;
-          this.scrollView.node.setPosition(cc.v2(-1100, 0));
-        }
           this.pageView.node.width = 320;
+          // const screenWidth = cc.winSize.width - 350;
+          this.scrollView.node.width = screenWidth;
+          this.scrollView.node.getChildByName("view").width = screenWidth;
+          this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
+          this.scrollView.node.setPosition(cc.v2(-650, 0));
+        }
+          // this.pageView.node.width = 320;
           // this.pageView.node.getChildByName("view").width = 325;
           // this.myWebView.node.width = 2150
       // }
