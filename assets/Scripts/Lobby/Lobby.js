@@ -614,12 +614,13 @@ getGamesByCategoryAll: function () {
   setFullScreenWidth() {
     if(!document.fullscreenElement){
       if(!this.pageViewParent.active){
-          this.scrollView.node.setPosition(cc.v2(-950, 0));
-          this.scrollView.node.width = 2100;
-          this.scrollView.node.getChildByName("view").width = 2200;
+          this.scrollView.node.setPosition(cc.v2(-1400, 0));
+          // this.scrollView.node.width = 2200;
+          // this.scrollView.node.getChildByName("view").width = 2400;
       }else{
-        this.scrollView.node.width = 1500;
-        this.scrollView.node.getChildByName("view").width = 1600;
+        this.scrollView.node.setPosition(cc.v2(-1100, 0));
+        // this.scrollView.node.width = 1920;
+        // this.scrollView.node.getChildByName("view").width = 1920;
         
       }
       this.pageView.node.width = 320;
@@ -628,19 +629,19 @@ getGamesByCategoryAll: function () {
         if(!this.pageViewParent.active){
           if(cc.sys.isMobile){
             this.scrollView.node.setPosition(cc.v2(-1100, 0));
-            this.scrollView.node.width = 2000;
-            this.scrollView.node.getChildByName("view").width = 2200;
+            // this.scrollView.node.width = 2000;
+            // this.scrollView.node.getChildByName("view").width = 2200;
           }else{
-            this.scrollView.node.setPosition(cc.v2(-900, 0));
-            this.scrollView.node.width = 2000;
-            this.scrollView.node.getChildByName("view").width = 2200;
+            this.scrollView.node.setPosition(cc.v2(-1400, 0));
+            // this.scrollView.node.width = 2200;
+            // this.scrollView.node.getChildByName("view").width = 2200;
           }
           
         }else{
-          const screenWidth = cc.winSize.width - 350;
-          this.scrollView.node.width = screenWidth;
-          this.scrollView.node.getChildByName("view").width = screenWidth;
-          this.scrollView.node.setPosition(cc.v2(-850, 0));
+          // const screenWidth = cc.winSize.width - 350;
+          // this.scrollView.node.width = screenWidth;
+          // this.scrollView.node.getChildByName("view").width = screenWidth;
+          this.scrollView.node.setPosition(cc.v2(-1100, 0));
         }
           this.pageView.node.width = 320;
           // this.pageView.node.getChildByName("view").width = 325;
