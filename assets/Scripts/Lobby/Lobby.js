@@ -759,5 +759,3 @@ getGamesByCategoryAll: function () {
         }
        
 });
-
-

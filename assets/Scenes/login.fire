@@ -13352,6 +13352,12 @@
     "smallSpin": {
       "__id__": 193
     },
+    "normalScreen": {
+      "__uuid__": "a99b625f-fb38-4b8e-8527-bc334f067e8e"
+    },
+    "fullScreenSprite": {
+      "__uuid__": "0ac3ccde-84dd-40fb-9b5c-74380b7e3bc8"
+    },
     "_id": "890VLfcNJJd64+Y9VnB5FJ"
   },
   {
@@ -45299,11 +45305,11 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "4c095658-dd6f-4d22-9306-4910172deaca"
+      "__uuid__": "37ab805d-94cc-49d6-8709-fcb7c5b00ed2"
     },
     "_clips": [
       {
-        "__uuid__": "4c095658-dd6f-4d22-9306-4910172deaca"
+        "__uuid__": "37ab805d-94cc-49d6-8709-fcb7c5b00ed2"
       }
     ],
     "playOnLoad": false,
