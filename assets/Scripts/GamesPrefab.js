@@ -71,6 +71,7 @@ cc.Class({
 
     updateItem(data, gameCategory) {
         let inst = this
+        console.log("this in gamesPrefab");
         let myData = data;
         cc.assetManager.loadRemote(data.thumbnail, (err, texture) => {
                 if (err) {
@@ -85,6 +86,7 @@ cc.Class({
                     this.loader.active = false;
                 }
         });
+        
         if(gameCategory == "fav"){
             this.blueHeart.active = false;
             this.redHeart.active = true;
