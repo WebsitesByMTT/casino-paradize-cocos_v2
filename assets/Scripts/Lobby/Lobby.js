@@ -184,7 +184,9 @@ cc.Class({
   smallSpin:{
     default: null,
     type: cc.Node
-  }
+  },
+  normalScreen: cc.SpriteFrame,
+  fullScreenSprite : cc.SpriteFrame
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -244,6 +246,9 @@ cc.Class({
    * @param {method} error -Callback to be executed if response.success is false!
    */
   fetchGames: function (gameCategory) {
+    if(this.gameCategory == "all"){
+      this.allTab.getChildByName("bg").active = true;
+    }
     let content = this.scrollView.content;
     let pageViewContent = this.pageView.content;
     pageViewContent.removeAllChildren();
@@ -423,8 +428,10 @@ getGamesByCategoryAll: function () {
 
   // for full Screen
   zoomFullScreenClick: function () {
-    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+    
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) { 
       // current working methods
+      this.setFullScreenWidth();
       if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
       } else if (document.documentElement.mozRequestFullScreen) {
@@ -435,6 +442,7 @@ getGamesByCategoryAll: function () {
         );
       }
     } else {
+      this.setFullScreenWidth();
       if (document.cancelFullScreen) {
         document.cancelFullScreen();
         // console.log("fullout1");
@@ -447,7 +455,7 @@ getGamesByCategoryAll: function () {
       }
 
     }
-    this.setFullScreenWidth();
+    
   },
   // Close Spin Popup Node
   closeSpinNode: function () {
@@ -751,5 +759,3 @@ getGamesByCategoryAll: function () {
         }
        
 });
-
-
