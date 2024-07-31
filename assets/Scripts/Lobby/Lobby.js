@@ -261,8 +261,8 @@ cc.Class({
     let content = this.scrollView.content;
     let pageViewContent = this.pageView.content;
     pageViewContent.removeAllChildren();
-    // content.removeAllChildren();
-    this.pageViewParent.active = true;
+    content.removeAllChildren();
+    this.pageViewParent.active = false;
     this.scrollView.node.setPosition(this.initialPosition);
     this.scrollView.node.getChildByName("view").width = 1600;
     this.scrollView.node.width = 1500;
@@ -284,23 +284,23 @@ cc.Class({
 
         this.itemsToLoad = [];
          this.currentIndex = 0;
-      //   if (featured.length > 0) {
-      //     this.pageViewParent.active = true;
-      //     this.scollItemCount = featured.length;
-      //     this.populatePageView(featured, gameCategory);
-      //   }
-      //   else{
-      //     this.pageViewParent.active = false;
-      //   }
-      //  // this is done for testing
-      //   if(gameCategory == "fav"){
-      //     this.populateScrollView(otherGames, gameCategory);
-      //   }else{
-      //     this.populateScrollView(featured, gameCategory);
-      //   }
-        // if (otherGames.length > 0) {
-        //   this.populateScrollView(otherGames, gameCategory);
-        // }
+        if (featured.length > 0) {
+          this.pageViewParent.active = true;
+          this.scollItemCount = featured.length;
+          this.populatePageView(featured, gameCategory);
+        }
+        else{
+          this.pageViewParent.active = false;
+        }
+       // this is done for testing
+        if(gameCategory == "fav"){
+          this.populateScrollView(otherGames, gameCategory);
+        }else{
+          this.populateScrollView(featured, gameCategory);
+        }
+        if (otherGames.length > 0) {
+          this.populateScrollView(otherGames, gameCategory);
+        }
         if(!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && cc.sys.isMobile){
           this.zoomFullScreenClick();
         }
@@ -745,12 +745,12 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           // this.scrollView.node.getChildByName("view").width = 2400;
       }else{
         this.scrollView.node.width = screenWidth;
-        this.scrollView.node.getChildByName("view").width = screenWidth;
+        this.scrollView.node.getChildByName("view").width = screenWidth - 300;
         this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
-        this.scrollView.node.setPosition(cc.v2(-650, 0));
+        this.scrollView.node.setPosition(cc.v2(-750, 100));
         // this.scrollView.node.width = 1920;
         // this.scrollView.node.getChildByName("view").width = 1920;
-        this.pageView.node.width = 320;
+        this.pageView.node.width = 450;
       }
      
       // this.pageView.node.getChildByName("view").width = 325;
@@ -768,12 +768,12 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           }
           
         }else{
-          this.pageView.node.width = 320;
-          const screenWidth = cc.winSize.width - 300;
+          this.pageView.node.width = 450;
+          const screenWidth = cc.winSize.width - 450;
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth;
           this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
-          this.scrollView.node.setPosition(cc.v2(-650, 0));
+          this.scrollView.node.setPosition(cc.v2(-750, 100));
         }
           // this.pageView.node.width = 320;
           // this.pageView.node.getChildByName("view").width = 325;
