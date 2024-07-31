@@ -70,8 +70,6 @@ cc.Class({
     },
 
     updateItem(data, gameCategory) {
-        let inst = this
-        console.log("this in gamesPrefab");
         let myData = data;
         cc.assetManager.loadRemote(data.thumbnail, (err, texture) => {
                 if (err) {

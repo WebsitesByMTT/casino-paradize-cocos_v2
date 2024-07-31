@@ -11033,9 +11033,9 @@ declare namespace cc {
 		默认设置为启动，我们强烈建议你不要将它设置为关闭。
 		即使当它启动时，你仍然能够设置你的 viewport meta，它不会被覆盖。
 		仅在 Web 模式下有效
-		@param enabled Enable automatic modification to "viewport" meta 
+		@param disabled Enable automatic modification to "viewport" meta 
 		*/
-		adjustViewportMeta(enabled: boolean): void;		
+		adjustViewportMeta(disabled: true): void;		
 		/**
 		!#en
 		Retina support is enabled by default for Apple device but disabled for other devices,<br/>

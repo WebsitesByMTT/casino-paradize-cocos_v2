@@ -204,6 +204,9 @@ cc.Class({
     if (!this.category) {
       this.category = "all";
     }
+  //   if (cc.sys.isMobile) {
+  //     this.scaleAllNodes(this.node, 1.1); // Pass the root node and scale factor
+  // }
 
     this.activeInputField = null; 
     this.setupLobbyInputFocusListeners();
@@ -224,10 +227,7 @@ cc.Class({
       this.cloudAnimNode.setPosition(resetPos);
     });
     cc.tween(this.cloudAnimNode).repeatForever(moveItem).start();
-    // cc.tween(this.cloudAnimNode).repeatForever(moveItem).start();
-    // this.moneySprite._tween = cc.tween(this.moneySprite)
-    //         .repeatForever(cc.tween().to(1, { angle: -360 }))
-    //         .start();
+
     this.getUserDetails();
     this.fetchGames(this.category);
     this.currentPage = 0;
@@ -261,8 +261,8 @@ cc.Class({
     let content = this.scrollView.content;
     let pageViewContent = this.pageView.content;
     pageViewContent.removeAllChildren();
-    content.removeAllChildren();
-    this.pageViewParent.active = false;
+    // content.removeAllChildren();
+    this.pageViewParent.active = true;
     this.scrollView.node.setPosition(this.initialPosition);
     this.scrollView.node.getChildByName("view").width = 1600;
     this.scrollView.node.width = 1500;
@@ -284,20 +284,20 @@ cc.Class({
 
         this.itemsToLoad = [];
          this.currentIndex = 0;
-        if (featured.length > 0) {
-          this.pageViewParent.active = true;
-          this.scollItemCount = featured.length;
-          this.populatePageView(featured, gameCategory);
-        }
-        else{
-          this.pageViewParent.active = false;
-        }
-       // this is done for testing
-        if(gameCategory == "fav"){
-          this.populateScrollView(otherGames, gameCategory);
-        }else{
-          this.populateScrollView(featured, gameCategory);
-        }
+      //   if (featured.length > 0) {
+      //     this.pageViewParent.active = true;
+      //     this.scollItemCount = featured.length;
+      //     this.populatePageView(featured, gameCategory);
+      //   }
+      //   else{
+      //     this.pageViewParent.active = false;
+      //   }
+      //  // this is done for testing
+      //   if(gameCategory == "fav"){
+      //     this.populateScrollView(otherGames, gameCategory);
+      //   }else{
+      //     this.populateScrollView(featured, gameCategory);
+      //   }
         // if (otherGames.length > 0) {
         //   this.populateScrollView(otherGames, gameCategory);
         // }
@@ -371,20 +371,34 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
   parent.addChild(item);
 },
 
-getGamesByCategoryAll: function () {
-    this.category = "all";
-    const gameTabs = [
-      this.fishTab.getChildByName("bg"),
-      this.favTab.getChildByName("bg"),
-      this.slotTab.getChildByName("bg"),
-      this.kenoTab.getChildByName("bg"),
-      this.otherTab.getChildByName("bg"),
-    ];
-    gameTabs.forEach((tab) => (tab.active = false));
-    this.allTab.getChildByName("bg").active = true;
-    this.fetchGames(this.category);
-},
-
+  getGamesByCategoryAll: function () {
+      this.category = "all";
+      const gameTabs = [
+        this.fishTab.getChildByName("bg"),
+        this.favTab.getChildByName("bg"),
+        this.slotTab.getChildByName("bg"),
+        this.kenoTab.getChildByName("bg"),
+        this.otherTab.getChildByName("bg"),
+        this.fishTab.getChildByName("FishingActive"),
+        this.favTab.getChildByName("FavouriteActive"),
+        this.slotTab.getChildByName("SlotsActive"),
+        this.kenoTab.getChildByName("KenoActive"),
+        this.otherTab.getChildByName("OtherActive")
+      ];
+      gameTabs.forEach((tab) => (tab.active = false));
+      const gameInactiveText = [
+        this.fishTab.getChildByName("FishingInactiveText"),
+        this.favTab.getChildByName("FavouriteInactive"),
+        this.slotTab.getChildByName("SlotsInactive"),
+        this.kenoTab.getChildByName("KenoInactive"),
+        this.otherTab.getChildByName("OtherInactive")
+      ];
+      gameInactiveText.forEach((newTab)=> (newTab.active) = true);
+      this.allTab.getChildByName("bg").active = true;
+      this.allTab.getChildByName("AllNormalTag").active = false;
+      this.allTab.getChildByName("AllActive").active = true;
+      this.fetchGames(this.category);
+  },
   getGamesByCategoryfish: function () {
     this.category = "fish";
     const gameTabs = [
@@ -393,9 +407,24 @@ getGamesByCategoryAll: function () {
       this.slotTab.getChildByName("bg"),
       this.kenoTab.getChildByName("bg"),
       this.otherTab.getChildByName("bg"),
+      this.allTab.getChildByName("AllActive"),
+      this.favTab.getChildByName("FavouriteActive"),
+      this.slotTab.getChildByName("SlotsActive"),
+      this.kenoTab.getChildByName("KenoActive"),
+      this.otherTab.getChildByName("OtherActive")
     ];
     gameTabs.forEach((tab) => (tab.active = false));
+    const gameInactiveText = [
+      this.allTab.getChildByName("AllNormalTag"),
+      this.favTab.getChildByName("FavouriteInactive"),
+      this.slotTab.getChildByName("SlotsInactive"),
+      this.kenoTab.getChildByName("KenoInactive"),
+      this.otherTab.getChildByName("OtherInactive")
+    ];
+    gameInactiveText.forEach((newTab)=> (newTab.active) = true);
     this.fishTab.getChildByName("bg").active = true;
+    this.fishTab.getChildByName("FishingInactiveText").active = false;
+    this.fishTab.getChildByName("FishingActive").active = true;
     this.fetchGames(this.category);
   },
   getGamesByCategoryfav: function () {
@@ -406,9 +435,24 @@ getGamesByCategoryAll: function () {
       this.slotTab.getChildByName("bg"),
       this.kenoTab.getChildByName("bg"),
       this.otherTab.getChildByName("bg"),
+      this.allTab.getChildByName("AllActive"),
+      this.fishTab.getChildByName("FishingActive"),
+      this.slotTab.getChildByName("SlotsActive"),
+      this.kenoTab.getChildByName("KenoActive"),
+      this.otherTab.getChildByName("OtherActive")
     ];
     gameTabs.forEach((tab) => (tab.active = false));
+    const gameInactiveText = [
+      this.allTab.getChildByName("AllNormalTag"),
+      this.fishTab.getChildByName("FishingInactiveText"),
+      this.slotTab.getChildByName("SlotsInactive"),
+      this.kenoTab.getChildByName("KenoInactive"),
+      this.otherTab.getChildByName("OtherInactive")
+    ];
+    gameInactiveText.forEach((newTab)=> (newTab.active) = true);
     this.favTab.getChildByName("bg").active = true;
+    this.favTab.getChildByName("FavouriteInactive").active = false;
+    this.favTab.getChildByName("FavouriteActive").active = true;
     this.fetchGames(this.category);
   },
   getGamesByCategorySlot: function (event) {
@@ -419,9 +463,24 @@ getGamesByCategoryAll: function () {
       this.favTab.getChildByName("bg"),
       this.kenoTab.getChildByName("bg"),
       this.otherTab.getChildByName("bg"),
+      this.allTab.getChildByName("AllActive"),
+      this.fishTab.getChildByName("FishingActive"),
+      this.favTab.getChildByName("FavouriteActive"),
+      this.kenoTab.getChildByName("KenoActive"),
+      this.otherTab.getChildByName("OtherActive")
     ];
     gameTabs.forEach((tab) => (tab.active = false));
+    const gameInactiveText = [
+      this.allTab.getChildByName("AllNormalTag"),
+      this.fishTab.getChildByName("FishingInactiveText"),
+      this.favTab.getChildByName("FavouriteInactive"),
+      this.kenoTab.getChildByName("KenoInactive"),
+      this.otherTab.getChildByName("OtherInactive")
+    ];
+    gameInactiveText.forEach((newTab)=> (newTab.active) = true);
     this.slotTab.getChildByName("bg").active = true;
+    this.slotTab.getChildByName("SlotsActive").active = true;
+    this.slotTab.getChildByName("SlotsInactive").active = false;
     this.fetchGames(this.category);
   },
   getGamesByCategoryKeno: function (event) {
@@ -432,9 +491,24 @@ getGamesByCategoryAll: function () {
       this.favTab.getChildByName("bg"),
       this.slotTab.getChildByName("bg"),
       this.otherTab.getChildByName("bg"),
+      this.allTab.getChildByName("AllActive"),
+      this.fishTab.getChildByName("FishingActive"),
+      this.favTab.getChildByName("FavouriteActive"),
+      this.slotTab.getChildByName("SlotsActive"),
+      this.otherTab.getChildByName("OtherActive")
     ];
     gameTabs.forEach((tab) => (tab.active = false));
+    const gameInactiveText = [
+      this.allTab.getChildByName("AllNormalTag"),
+      this.fishTab.getChildByName("FishingInactiveText"),
+      this.favTab.getChildByName("FavouriteInactive"),
+      this.slotTab.getChildByName("SlotsInactive"),
+      this.otherTab.getChildByName("OtherInactive")
+    ];
+    gameInactiveText.forEach((newTab)=> (newTab.active) = true);
     this.kenoTab.getChildByName("bg").active = true;
+    this.kenoTab.getChildByName("KenoActive").active = true;
+    this.kenoTab.getChildByName("KenoInactive").active = false;
     this.fetchGames(this.category);
   },
   getGamesByCategoryOther: function (event) {
@@ -445,17 +519,29 @@ getGamesByCategoryAll: function () {
       this.favTab.getChildByName("bg"),
       this.slotTab.getChildByName("bg"),
       this.kenoTab.getChildByName("bg"),
+      this.allTab.getChildByName("AllActive"),
+      this.fishTab.getChildByName("FishingActive"),
+      this.favTab.getChildByName("FavouriteActive"),
+      this.slotTab.getChildByName("SlotsActive"),
+      this.kenoTab.getChildByName("KenoActive")
     ];
     gameTabs.forEach((tab) => (tab.active = false));
+    const gameInactiveText = [
+      this.allTab.getChildByName("AllNormalTag"),
+      this.fishTab.getChildByName("FishingInactiveText"),
+      this.favTab.getChildByName("FavouriteInactive"),
+      this.slotTab.getChildByName("SlotsInactive"),
+      this.kenoTab.getChildByName("KenoInactive")
+    ];
+    gameInactiveText.forEach((newTab)=> (newTab.active) = true);
     this.otherTab.getChildByName("bg").active = true;
+    this.otherTab.getChildByName("OtherActive").active = true;
+    this.otherTab.getChildByName("OtherInactive").active = false;
     this.fetchGames(this.category);
   },
 
   // for full Screen
   zoomFullScreenClick: function () {
-
-    console.log(this.fullScreenButton, 'this.fullScreenButton');
-    
     if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) { 
       this.fullScreenButton.getComponent(cc.Sprite).spriteFrame = this.normalScreen;
       // current working methods
@@ -482,9 +568,7 @@ getGamesByCategoryAll: function () {
         // console.log("fullout3");
         document.webkitCancelFullScreen();
       }
-
     }
-    
   },
   // Close Spin Popup Node
   closeSpinNode: function () {
@@ -685,7 +769,7 @@ getGamesByCategoryAll: function () {
           
         }else{
           this.pageView.node.width = 320;
-          // const screenWidth = cc.winSize.width - 350;
+          const screenWidth = cc.winSize.width - 300;
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth;
           this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
@@ -796,6 +880,11 @@ getGamesByCategoryAll: function () {
           if(this.smallSpin){
             this.smallSpin.angle -= this.rotationSpeed * dt
           }
-        }
+        },
+
+      //   scaleAllNodes(node, scaleFactor) {
+      //     node.scale *= scaleFactor;
+      //     node.children.forEach(child => this.scaleAllNodes(child, scaleFactor));
+      // }
        
 });
