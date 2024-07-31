@@ -67,7 +67,9 @@ cc.Class({
         dotButton:{
             default: null,
             type: cc.Node
-        }
+        },
+        randomImageNode: cc.Node, // Reference to the node containing the sprite
+        spriteFrames: [cc.SpriteFrame],
     
     },
     // LIFE-CYCLE CALLBACKS:
@@ -80,6 +82,8 @@ cc.Class({
         if(!cc.sys.isNative){
             this.checkPageReload();
         }
+        this.changeRandomImage();
+       
     },
 
     checkPageReload() {
@@ -127,6 +131,17 @@ cc.Class({
             }
             
         }.bind(this));
+    },
+
+    changeRandomImage() {
+        // Get a random index between 0 and the length of the spriteFrames array
+        const randomIndex = Math.floor(Math.random() * this.spriteFrames.length);
+
+        // Get the sprite component from the loginNode
+        const spriteComponent = this.randomImageNode.getComponent(cc.Sprite);
+
+        // Set the spriteFrame to one of the random images
+        spriteComponent.spriteFrame = this.spriteFrames[randomIndex];
     },
 
     disableDefaultKeyboard() {

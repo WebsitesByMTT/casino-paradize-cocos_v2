@@ -61,8 +61,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 675
+      "width": 450,
+      "height": 900
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -327,8 +327,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 675
+      "width": 450,
+      "height": 900
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -395,8 +395,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 310,
-      "height": 640
+      "width": 440,
+      "height": 885
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -462,8 +462,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 290,
-      "height": 620
+      "width": 430,
+      "height": 850
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -671,8 +671,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 667
+      "width": 450,
+      "height": 900
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1101,8 +1101,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        110.76,
-        224.799,
+        162.037,
+        242.757,
         0,
         0,
         0,
@@ -1383,8 +1383,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        112.741,
-        224.799,
+        164.018,
+        242.757,
         0,
         0,
         0,
@@ -1490,8 +1490,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        112.741,
-        224.799,
+        164.018,
+        242.757,
         0,
         0,
         0,
@@ -1585,8 +1585,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 450
+      "width": 390,
+      "height": 500
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1728,7 +1728,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
+      "width": 350,
       "height": 300
     },
     "_anchorPoint": {
