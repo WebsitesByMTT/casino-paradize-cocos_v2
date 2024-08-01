@@ -64,8 +64,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 345,
-      "height": 759
+      "width": 409,
+      "height": 869
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -330,8 +330,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 345,
-      "height": 759
+      "width": 409,
+      "height": 869
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -398,8 +398,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 325,
-      "height": 740
+      "width": 389,
+      "height": 850
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -465,8 +465,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 735
+      "width": 384,
+      "height": 845
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -675,7 +675,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 344,
-      "height": 759
+      "height": 869
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1085,8 +1085,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
-      "height": 450
+      "width": 384,
+      "height": 550
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1243,8 +1243,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        128.093,
-        242.757,
+        159.63,
+        316.881,
         0,
         0,
         0,
@@ -1418,8 +1418,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        128.093,
-        242.757,
+        159.63,
+        316.881,
         0,
         0,
         0,
@@ -1525,8 +1525,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        130.074,
-        242.757,
+        161.611,
+        316.881,
         0,
         0,
         0,
@@ -1632,8 +1632,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        130.074,
-        242.757,
+        161.611,
+        316.881,
         0,
         0,
         0,

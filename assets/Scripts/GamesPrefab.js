@@ -30,7 +30,7 @@ cc.Class({
     },
 
     onLoad() {
-        this.setupEventListeners();
+        
         const lobbyNode = cc.find("Canvas/LobbyNode");
         if (lobbyNode) {
             this.lobbyNode = lobbyNode.getComponent("Lobby");
@@ -40,7 +40,7 @@ cc.Class({
         } else {
            
         }
-      
+        this.setupEventListeners();
         this.startLoaderAnimation();
     },
 
@@ -70,6 +70,7 @@ cc.Class({
     },
 
     updateItem(data, gameCategory) {
+        // console.log("data and gameCategory", data, gameCategory);
         let myData = data;
         cc.assetManager.loadRemote(data.thumbnail, (err, texture) => {
                 if (err) {
@@ -112,6 +113,7 @@ cc.Class({
     },
 
     onTouchStart(event) {
+        console.log("tousStart");
         this.touchStartPos = event.getLocation();
     },
 
@@ -130,6 +132,7 @@ cc.Class({
 
     //Prefab Clicke to open the game
     onClickItem(data) {
+        // console.log("click data on Gameprefab");
         let inst = this;
         if (data.slug == undefined) {
             return;
@@ -172,8 +175,7 @@ cc.Class({
                 }, 2000);
                 if (inst.lobbyNode && inst.lobbyNode.category == "fav") {
                     inst.lobbyNode.fetchGames("fav");
-                }
-                   
+                } 
             }.bind(this));
         }
     },
