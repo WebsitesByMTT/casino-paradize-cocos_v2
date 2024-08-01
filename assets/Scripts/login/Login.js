@@ -70,6 +70,7 @@ cc.Class({
         },
         randomImageNode: cc.Node, // Reference to the node containing the sprite
         spriteFrames: [cc.SpriteFrame],
+       
     
     },
     // LIFE-CYCLE CALLBACKS:
@@ -83,9 +84,20 @@ cc.Class({
             this.checkPageReload();
         }
         this.changeRandomImage();
-       
+         //KeyBoard enter event register
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.mouseEnter, this);
     },
 
+   
+    mouseEnter: function(event){
+        if (event.keyCode === cc.macro.KEY.enter) {
+           this.onLoginClick();
+        }
+    },
+    onDestroy () {
+        // Unregister the keyboard event listener when the node is destroyed
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    },
     checkPageReload() {
         if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
             console.log('This page is reloaded.');
@@ -187,9 +199,9 @@ cc.Class({
         allKeyboardButtons.forEach(button => {
             button.on(cc.Node.EventType.TOUCH_END, this.onKeyboardButtonClicked, this);
         });
-        if (this.deleteButton) { // Add listener for the delete button
-            this.deleteButton.on(cc.Node.EventType.TOUCH_END, this.onDeleteButtonClicked, this);
-        }
+        // if (this.deleteButton) { // Add listener for the delete button
+        //     this.deleteButton.on(cc.Node.EventType.TOUCH_END, this.onDeleteButtonClicked, this);
+        // }
     },
 
     getAllKeyboardButtons() {
@@ -235,6 +247,7 @@ cc.Class({
     },
 
     removeFromActiveInput() {
+        console.error("delete");
         if (this.activeInputField && this.activeInputField.string.length > 0) {
             this.activeInputField.string = this.activeInputField.string.slice(0, -1); // Remove last character
         }
