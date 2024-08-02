@@ -10,11 +10,13 @@ window.boot = function () {
         // Loading splash scene
         var splash = document.getElementById('splash');
         var progressBar = splash.querySelector('.progress-bar span');
+        var coin = document.querySelector('.coin');
         onProgress = function (finish, total) {
             var percent = 100 * finish / total;
             if (progressBar) {
                 progressBar.style.width = percent.toFixed(2) + '%';
             }
+            coin.style.left = percent.toFixed(2) - 5 + '%';
         };
         splash.style.display = 'block';
         progressBar.style.width = '0%';
