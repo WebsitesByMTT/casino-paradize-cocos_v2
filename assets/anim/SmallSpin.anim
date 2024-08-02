@@ -1,0 +1,25 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "SmallSpin",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.006666666666666667,
+  "sample": 150,
+  "speed": 0.25,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "5718aa99-9719-4cae-ab81-8b81acf88d88"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
