@@ -326,9 +326,6 @@ cc.Class({
         //   this.populateScrollView(featured, gameCategory);
         // }
         
-        // if(!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && cc.sys.isMobile){
-        //   this.zoomFullScreenClick();
-        // }
         this.setFullScreenWidth();
     }.bind(this));
 },
@@ -373,23 +370,6 @@ drawIndicator: function(count) {
   //     indicatorNode.addChild(indicatorSprite);
   // }
 },
-// onTouchStart(event) {
-//   this.touchStartPos = event.getLocation();
-// },
-
-// onTouchEnd(event) {
-//   let touchEndPos = event.getLocation();
-//   let distance = touchEndPos.sub(this.touchStartPos).mag();
-//   if (distance < 10) { // Adjust this threshold as needed
-//   }
-//   else{
-//      this.onScrolling()
-//   }
-// },
-// onTouchCancel() {
-//   this.touchStartPos = null;
-// },
-
 populateScrollView: function(otherGames, gameCategory) {
   
   let scrollViewContent = this.scrollView.content;
@@ -666,8 +646,6 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
   let inst= this
   let address = K.ServerAddress.ipAddress + K.ServerAPI.userDetails
     ServerCom.httpRequest("GET", address, "", function(response){
-      // let username = response.username; // Assuming response.username is 'ins'
-      // let capitalizedUsername = inst.capitalizeFirstLetter(username);
       inst.id = response._id;
       inst.userId.string = response.username
       let formattedCredits = parseFloat(response.credits).toFixed(2);
@@ -769,10 +747,8 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
     const screenWidth = cc.winSize.width;
     if(!document.fullscreenElement){
       if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
-          // console.log(this.scrollView.node, "his.scrollView.node width check when normal screen with pageview/feature");
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth + 344;
-          // this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
           this.scrollView.node.setPosition(cc.v2(-1090, 100));
           // this.scrollView.node.width = 2200;
           // this.scrollView.node.getChildByName("view").width = 2400;
@@ -783,7 +759,6 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
         }
         this.scrollView.node.width = screenWidth - 200;
         this.scrollView.node.getChildByName("view").width = screenWidth - 200;
-        // this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
         this.scrollView.node.setPosition(cc.v2(-570, 100));
         // this.scrollView.node.width = 1920;
         // this.scrollView.node.getChildByName("view").width = 1920;
@@ -798,12 +773,9 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
             this.scrollView.node.width = screenWidth;
             this.scrollView.node.getChildByName("view").width = screenWidth + 344;
             this.scrollView.node.setPosition(cc.v2(-1100, 100));
-            // this.scrollView.node.width = 2000;
-            // this.scrollView.node.getChildByName("view").width = 2200;
           }else{
             this.scrollView.node.width = screenWidth;
             this.scrollView.node.getChildByName("view").width = screenWidth;
-            // this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
             this.scrollView.node.setPosition(cc.v2(-980, 100));
           }
           
@@ -819,10 +791,6 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           // this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
           this.scrollView.node.setPosition(cc.v2(-570, 100));
         }
-          // this.pageView.node.width = 320;
-          // this.pageView.node.getChildByName("view").width = 325;
-          // this.myWebView.node.width = 2150
-      // }
     }
    },
    // Auto Scroll 
@@ -935,10 +903,4 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
             this.smallSpin.angle -= this.rotationSpeed * dt
           }
         },
-
-      //   scaleAllNodes(node, scaleFactor) {
-      //     node.scale *= scaleFactor;
-      //     node.children.forEach(child => this.scaleAllNodes(child, scaleFactor));
-      // }
-       
 });

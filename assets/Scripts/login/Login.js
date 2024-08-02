@@ -85,6 +85,7 @@ cc.Class({
         }
         this.changeRandomImage();
          //KeyBoard enter event register
+        this.node.on(cc.Node.EventType.KEY_DOWN, this.mouseEnter, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.mouseEnter, this);
     },
 

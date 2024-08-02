@@ -40,23 +40,24 @@ cc.Class({
         } else {
            
         }
+        this.rotationSpeed = 180;
         this.setupEventListeners();
-        this.startLoaderAnimation();
+        // this.startLoaderAnimation();
     },
 
-    startLoaderAnimation() {
-        if (this.aniMation._tween) {
-            this.aniMation._tween.stop();
-        }
-        this.aniMation._tween = cc.tween(this.aniMation).repeatForever(cc.tween().to(1, { angle: -360 })).start();
-    },
+    // startLoaderAnimation() {
+    //     if (this.aniMation._tween) {
+    //         this.aniMation._tween.stop();
+    //     }
+    //     this.aniMation._tween = cc.tween(this.aniMation).repeatForever(cc.tween().to(1, { angle: -360 })).start();
+    // },
 
-    stopLoaderAnimation() {
-        if (this.aniMation._tween) {
-            this.aniMation._tween.stop();
-            this.aniMation.angle = 0;
-        }
-    },
+    // stopLoaderAnimation() {
+    //     if (this.aniMation._tween) {
+    //         this.aniMation._tween.stop();
+    //         this.aniMation.angle = 0;
+    //     }
+    // },
 
     setupEventListeners() {
         // // Add new listeners
@@ -179,4 +180,10 @@ cc.Class({
             }.bind(this));
         }
     },
+
+    update(dt){
+        if(this.loader.active){
+          this.aniMation.angle -= this.rotationSpeed * dt
+        }
+      },
 });

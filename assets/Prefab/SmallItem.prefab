@@ -398,7 +398,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 325,
+      "width": 345,
       "height": 740
     },
     "_anchorPoint": {
@@ -465,8 +465,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 320,
-      "height": 735
+      "width": 345,
+      "height": 725
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -618,7 +618,7 @@
     "node": {
       "__id__": 8
     },
-    "_enabled": true,
+    "_enabled": false,
     "_materials": [
       {
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
