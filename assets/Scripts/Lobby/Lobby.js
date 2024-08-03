@@ -42,6 +42,14 @@ cc.Class({
       default: null,
       type: cc.Node,
     },
+    settingNode:{
+      default: null,
+      type: cc.Node
+    },
+    logoutNode:{
+      default: null,
+      type: cc.Node
+    },
     passwordNode: {
       default: null,
       type: cc.Node,
@@ -374,7 +382,7 @@ populateScrollView: function(otherGames, gameCategory) {
   
   let scrollViewContent = this.scrollView.content;
   for (let i = 0; i < otherGames.length; i++) {
-    console.log("populateScrollView");
+    // console.log("populateScrollView");
     if(otherGames[i].status == "active"){
       this.populateItems(otherGames[i], this.itemPrefab, scrollViewContent, gameCategory);
     }
@@ -663,6 +671,8 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
   },
   // Logout Button Clicked
   logOutClick: function () {
+    this.logoutNode.active = false;
+    this.popupNode.active = false;
     this.node.active = false;
     this.loginNode.logutClick();
   },
@@ -728,11 +738,23 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
     this.passwordNode.active = true;
     this.popupNode.active = true;
   },
+
+  settingTabClick: function(){
+    this.popupNode.active = true;
+    this.settingNode.active = true;
+  },
+
+  logoutButtonClicked: function(){
+    this.popupNode.active = true;
+    this.logoutNode.active = true;
+  },
   // close all popup
   closePopupBtn: function () {
-    if (this.passwordNode.active || this.profileNode.active) {
+    if (this.passwordNode.active || this.profileNode.active || this.settingNode.active || this.logoutNode.active) {
       this.passwordNode.active = false;
       this.profileNode.active = false;
+      this.settingNode.active = false;
+      this.logoutNode.active = false;
     }
     this.popupNode.active = false;
   },
@@ -750,23 +772,17 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth + 344;
           this.scrollView.node.setPosition(cc.v2(-1090, 100));
-          // this.scrollView.node.width = 2200;
-          // this.scrollView.node.getChildByName("view").width = 2400;
       }else{
         if(this.mobilePageViewParent.active){
-          console.log("this.mobilePageViewParent", this.mobilePageViewParent);
-          // this.mobilePageViewParent.setPosition(cc.v2(-700, 0));
+          // console.log("this.mobilePageViewParent", this.mobilePageViewParent);
         }
         this.scrollView.node.width = screenWidth - 200;
         this.scrollView.node.getChildByName("view").width = screenWidth - 200;
         this.scrollView.node.setPosition(cc.v2(-570, 100));
-        // this.scrollView.node.width = 1920;
-        // this.scrollView.node.getChildByName("view").width = 1920;
         this.pageView.node.width = 344;
         this.mobilePageView.node.width = 409;
       }
      
-      // this.pageView.node.getChildByName("view").width = 325;
     } else{      
         if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
           if(cc.sys.isMobile){
@@ -781,14 +797,12 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           
         }else{
           if(this.mobilePageViewParent.active){
-            // this.mobilePageViewParent.setPosition(cc.v2(-700, 0))
           }
           this.pageView.node.width = 344;
           this.mobilePageView.node.width = 409;
           const screenWidth = cc.winSize.width - 344;
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth;
-          // this.scrollView.node.getChildByName("view").getChildByName("content").width = screenWidth
           this.scrollView.node.setPosition(cc.v2(-570, 100));
         }
     }
@@ -849,9 +863,9 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
         allKeyboardButtons.forEach(button => {
             button.on(cc.Node.EventType.TOUCH_END, this.onKeyboardButtonClicked, this);
         });
-        if (this.deleteButton) { // Add listener for the delete button
-            this.deleteButton.on(cc.Node.EventType.TOUCH_END, this.onDeleteButtonClicked, this);
-        }
+        // if (this.deleteButton) { // Add listener for the delete button
+        //     this.deleteButton.on(cc.Node.EventType.TOUCH_END, this.onDeleteButtonClicked, this);
+        // }
     },
 
     getAllKeyboardButtons() {

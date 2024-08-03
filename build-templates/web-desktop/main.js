@@ -14,16 +14,20 @@ window.boot = function () {
         onProgress = function (finish, total) {
             var percent = 100 * finish / total;
             if (progressBar) {
-                progressBar.style.width = percent.toFixed(2) + '%';
+                // progressBar.style.width = percent.toFixed(2) + '%';
             }
-            coin.style.left = percent.toFixed(2) - 5 + '%';
+            progressBar.style.width = percent.toFixed(2) + '%';
+            coin.style.left = percent.toFixed(2) - 2 + '%';
+            // console.log("percentage", percent);
         };
         splash.style.display = 'block';
         progressBar.style.width = '0%';
-
         cc.director.once(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
-            splash.style.display = 'none';
+            setTimeout(() => {  
+                splash.style.display = 'none';
+            }, 2000);
         });
+       
     }
 
     var onStart = function () {

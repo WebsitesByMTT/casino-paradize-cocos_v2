@@ -118,6 +118,7 @@ p.footer {
 .coin {
     position: absolute;
     top: -8px;
+    left: 0%;
     width: 30px !important;
     height: 30px !important;
     background-image: url(./coin.png);
