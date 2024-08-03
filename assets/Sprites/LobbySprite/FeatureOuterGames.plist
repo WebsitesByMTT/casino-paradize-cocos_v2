@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>newFeaturedGames.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{344,759}</string>
+                <key>spriteSourceSize</key>
+                <string>{344,759}</string>
+                <key>textureRect</key>
+                <string>{{0,0},{344,759}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>FeatureOuterGames.png</string>
+            <key>size</key>
+            <string>{344,759}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:4bfd812ddb45ed226ae907ab27ff9a99:728dcdcae00b6084d843a7aae612078a:97c75666ab28e858775d217939021247$</string>
+            <key>textureFileName</key>
+            <string>FeatureOuterGames.png</string>
+        </dict>
+    </dict>
+</plist>

@@ -1,0 +1,19 @@
+{
+  "__type__": "cc.Material",
+  "_name": "FeaturedShader",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "532358be-cad0-4231-a8ac-e76d87b3acd8"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "wipe": -103.00000000000001,
+        "start_angle": 0
+      },
+      "defines": {}
+    }
+  }
+}

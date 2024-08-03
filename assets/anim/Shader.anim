@@ -1,16 +1,16 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "RotateLeftRight",
+  "_name": "Shader",
   "_objFlags": 0,
   "_native": "",
   "_duration": 0,
-  "sample": 60,
-  "speed": 0.35,
-  "wrapMode": 2,
+  "sample": 240,
+  "speed": 0.25,
+  "wrapMode": 0,
   "curveData": {
     "comps": {
-      "cc.Sprite": {
-        "spriteFrame": []
+      "Shader": {
+        "Wipe": []
       }
     }
   },
