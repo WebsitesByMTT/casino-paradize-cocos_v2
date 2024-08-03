@@ -68,6 +68,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        backgroundMusic:{
+            default: null,
+            type: cc.AudioClip
+        },
         randomImageNode: cc.Node, // Reference to the node containing the sprite
         spriteFrames: [cc.SpriteFrame],
        
@@ -87,6 +91,8 @@ cc.Class({
          //KeyBoard enter event register
         this.node.on(cc.Node.EventType.KEY_DOWN, this.mouseEnter, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.mouseEnter, this);
+        this.audioClipID = cc.audioEngine.play(this.backgroundMusic, true, 0.5)
+        cc.game.loadAudioID = this.audioClipID
     },
 
    
@@ -99,13 +105,13 @@ cc.Class({
         // Unregister the keyboard event listener when the node is destroyed
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
+    //Check for page reload
     checkPageReload() {
         if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-            console.log('This page is reloaded.');
             this.handlePageReload();
         }
     },
-
+    // on page reload check username and password save or not if yes the hit auto login
     handlePageReload() {
         let username, password;
         if (cc.sys.isBrowser) {
@@ -180,7 +186,6 @@ cc.Class({
  
     onInputFieldClicked(event) {
         // Focus the corresponding input field to trigger the keyboard
-        // console.log(event);
         const inputNode = event.currentTarget.getComponent(cc.EditBox);
         if (inputNode) {
             // inputNode.focus()
@@ -248,7 +253,6 @@ cc.Class({
     },
 
     removeFromActiveInput() {
-        console.error("delete");
         if (this.activeInputField && this.activeInputField.string.length > 0) {
             this.activeInputField.string = this.activeInputField.string.slice(0, -1); // Remove last character
         }
