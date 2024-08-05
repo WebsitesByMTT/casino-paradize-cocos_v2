@@ -91,16 +91,21 @@ cc.Class({
             } else if (cc.sys.os === cc.sys.OS_IOS) {
                 console.log("Running on iOS Browser");
                 this.newWebView.node.on('loaded', () => {
-                    setTimeout(() => {
                         this.newWebView.evaluateJS(`
+                             try {
+                                var meta = document.createElement('meta');
+                                meta.httpEquiv = "Permissions-Policy";
+                                meta.content = "accelerometer=self";
+                                document.head.appendChild(meta);
+                            } catch (e) {
+                                console.error('Failed to set Permissions-Policy:', e);
+                            }
                             try {
-                                 window.postMessage({ type: 'authToken', token: '${token}' }, '${url}');
+                                window.postMessage({ type: 'authToken', token: '${token}' }, '${url}');
                             } catch (e) {
                                 console.error('Failed to post message:', e);
                             }
                         `);
-                    }, 1000);
-                    
                 });
             } else {
                 console.log("Running on Desktop Browser");
