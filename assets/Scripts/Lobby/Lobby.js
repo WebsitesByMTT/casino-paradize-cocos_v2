@@ -10,6 +10,14 @@ cc.Class({
       default: null,
       type: cc.Label,
     },
+    profileRightNode:{
+      default: null,
+      type: cc.Node
+    },
+    profileLeftNode:{
+      default: null,
+      type: cc.Node
+    },
     coinsLabel: {
       default: null,
       type: cc.Label,
@@ -209,7 +217,23 @@ cc.Class({
   },
   fullScreenButton: cc.Button,
   normalScreen: cc.SpriteFrame,
-  fullScreenSprite : cc.SpriteFrame
+  fullScreenSprite : cc.SpriteFrame,
+  starAnimationBottom: {
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationTop:{
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationMobileBottom: {
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationMobileTop:{
+    default: null,
+    type: cc.Node,
+  }
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -249,6 +273,14 @@ cc.Class({
     this.schedule(this.autoScrollPageView, this.scrollInterval);
     // this.setUpPageviewEvent();
     this.rotationSpeed = 180;
+    if(cc.sys.isMobile){
+      this.starScalingAnimation(this.starAnimationMobileBottom);
+      this.starScalingAnimation(this.starAnimationMobileTop);
+    }else{
+      this.starScalingAnimation(this.starAnimationBottom);
+      this.starScalingAnimation(this.starAnimationTop);
+    }
+    
   },
 
   // setUpPageviewEvent: function(){
@@ -750,7 +782,11 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
   },
   // close all popup
   closePopupBtn: function () {
+    let inst = this
     if (this.passwordNode.active || this.profileNode.active || this.settingNode.active || this.logoutNode.active) {
+      inst.oldPassword.string == " ";
+      inst.newPassword.string == " ";
+      inst.confirmPassword.string == " ";
       this.passwordNode.active = false;
       this.profileNode.active = false;
       this.settingNode.active = false;
@@ -767,7 +803,18 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
 
   setFullScreenWidth() {
     const screenWidth = cc.winSize.width;
+    var w = window.innerWidth;
+    // console.log(screenWidth, w);
+    // console.log(document.body.offsetWidth);
+    
     if(!document.fullscreenElement){
+      if(w >= 1920){
+        this.profileRightNode.setPosition(cc.v2(711, -6));
+        this.profileLeftNode.setPosition(cc.v2(-760, 0))
+      }else{
+          this.profileRightNode.setPosition(cc.v2(600, -6));
+          this.profileLeftNode.setPosition(cc.v2(-630, 0))    
+      }
       if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
           this.scrollView.node.width = screenWidth;
           this.scrollView.node.getChildByName("view").width = screenWidth + 344;
@@ -784,6 +831,13 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
       }
      
     } else{      
+      if(w >= 1920){ 
+        this.profileRightNode.setPosition(cc.v2(600, -6));
+        this.profileLeftNode.setPosition(cc.v2(-630, 0))
+      }else{
+          this.profileRightNode.setPosition(cc.v2(600, -6));
+          this.profileLeftNode.setPosition(cc.v2(-630, 0))
+      }
         if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
           if(cc.sys.isMobile){
             this.scrollView.node.width = screenWidth;
@@ -794,7 +848,6 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
             this.scrollView.node.getChildByName("view").width = screenWidth;
             this.scrollView.node.setPosition(cc.v2(-980, 100));
           }
-          
         }else{
           if(this.mobilePageViewParent.active){
           }
@@ -807,6 +860,55 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
         }
     }
    },
+   // Staranimation to scale and rotate contiously
+   starScalingAnimation: function(targetNode){
+      targetNode.setScale(0.5);
+      targetNode.setRotation(0)
+      cc.tween(targetNode)
+      .parallel(
+        cc.tween().to(1, { scale: 2 }).to(1, { scale: 0.5 }), // Scale up and down
+        cc.tween().by(2, { angle: 360 }) // Rotate continuously
+      )
+      .union()
+      .repeatForever()
+      .start()
+   },
+
+//   setFullScreenWidth() {
+//     const screenWidth = cc.winSize.width;
+//     const windowWidth = window.innerWidth;
+//     const isFullscreen = document.fullscreenElement;
+//     const isWideScreen = windowWidth >= 1920;
+
+//     // Set profile positions based on screen width
+//     const profileRightPosition = isWideScreen ? cc.v2(711, -6) : cc.v2(600, -6);
+//     const profileLeftPosition = isWideScreen ? cc.v2(-730, 0) : cc.v2(-630, 0);
+    
+//     this.profileRightNode.setPosition(profileRightPosition);
+//     this.profileLeftNode.setPosition(profileLeftPosition);
+
+//     // Determine scrollView and view widths and positions
+//     if (!this.pageViewParent.active && !this.mobilePageViewParent.active) {
+//         const adjustedWidth = isFullscreen && !cc.sys.isMobile ? screenWidth : screenWidth - 200;
+//         const viewWidth = adjustedWidth + 344;
+//         const positionX = isFullscreen && !cc.sys.isMobile ? -1100 : -570;
+        
+//         this.scrollView.node.width = adjustedWidth;
+//         this.scrollView.node.getChildByName("view").width = viewWidth;
+//         this.scrollView.node.setPosition(cc.v2(positionX, 100));
+//     } else {
+//         const pageWidth = 344;
+//         const mobilePageWidth = 409;
+//         const adjustedWidth = screenWidth - pageWidth;
+        
+//         this.pageView.node.width = pageWidth;
+//         this.mobilePageView.node.width = mobilePageWidth;
+//         this.scrollView.node.width = adjustedWidth;
+//         this.scrollView.node.getChildByName("view").width = adjustedWidth;
+//         this.scrollView.node.setPosition(cc.v2(-570, 100));
+//     }
+// },
+
    // Auto Scroll 
    autoScrollPageView() {
     let content, targetPos;

@@ -111,7 +111,7 @@ p.footer {
     background-size: 30px 30px;   
     /* background-image: url(./assets/coin.png) no-repeat center;       */
     background: linear-gradient(to right, #FCD681, #FAA32B, #CB8423); 
-    animation: animate-stripes 1s linear infinite;  
+    /* animation: animate-stripes 1s linear infinite;   */
     border-radius: 50px;           
 }
 

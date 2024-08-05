@@ -4,153 +4,153 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Saber frame10.png</key>
+            <key>Anim1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{0,0},{391,770}}</string>
+                <string>{{0,0},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame11.png</key>
+            <key>Anim10.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{391,0},{391,770}}</string>
+                <string>{{1636,658},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame12.png</key>
+            <key>Anim2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{782,0},{391,770}}</string>
+                <string>{{409,0},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame13.png</key>
+            <key>Anim3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{1173,0},{391,770}}</string>
+                <string>{{818,0},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame14.png</key>
+            <key>Anim4.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{1564,0},{391,770}}</string>
+                <string>{{1227,0},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame15.png</key>
+            <key>Anim5.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{0,770},{391,770}}</string>
+                <string>{{1636,0},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame16.png</key>
+            <key>Anim6.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{391,770},{391,770}}</string>
+                <string>{{0,658},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame17.png</key>
+            <key>Anim7.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{782,770},{391,770}}</string>
+                <string>{{409,658},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame18.png</key>
+            <key>Anim8.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{1173,770},{391,770}}</string>
+                <string>{{818,658},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Saber frame19.png</key>
+            <key>Anim9.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>spriteSourceSize</key>
-                <string>{391,770}</string>
+                <string>{409,658}</string>
                 <key>textureRect</key>
-                <string>{{1564,770},{391,770}}</string>
+                <string>{{1227,658},{409,658}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -164,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>ShaderAnimationOne.png</string>
+            <string>ShaberEff.png</string>
             <key>size</key>
-            <string>{1955,1540}</string>
+            <string>{2045,1316}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6886b08ae2f85c9dc9246fa92de52b5f:9595d505d1214997540555e31e18644f:b15680babfcd0a41c3b7a9dbe14419ff$</string>
+            <string>$TexturePacker:SmartUpdate:19daa4ae0bc440d37e748b0f21ff98fa:9db86ee1d238ac7abeab6444cbfde928:e06cc5221da2edf567c8849e74aa23b7$</string>
             <key>textureFileName</key>
-            <string>ShaderAnimationOne.png</string>
+            <string>ShaberEff.png</string>
         </dict>
     </dict>
 </plist>
