@@ -68,10 +68,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        backgroundMusic:{
-            default: null,
-            type: cc.AudioClip
-        },
+        // backgroundMusic:{
+        //     default: null,
+        //     type: cc.AudioClip
+        // },
         randomImageNode: cc.Node, // Reference to the node containing the sprite
         spriteFrames: [cc.SpriteFrame],
        
@@ -91,8 +91,8 @@ cc.Class({
          //KeyBoard enter event register
         this.node.on(cc.Node.EventType.KEY_DOWN, this.mouseEnter, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.mouseEnter, this);
-        this.audioClipID = cc.audioEngine.play(this.backgroundMusic, true, 0.5)
-        cc.game.loadAudioID = this.audioClipID
+        // this.audioClipID = cc.audioEngine.play(this.backgroundMusic, true, 0.5)
+        // cc.game.loadAudioID = this.audioClipID
     },
 
    

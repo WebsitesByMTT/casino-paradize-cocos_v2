@@ -10,6 +10,14 @@ cc.Class({
       default: null,
       type: cc.Label,
     },
+    profileRightNode:{
+      default: null,
+      type: cc.Node
+    },
+    profileLeftNode:{
+      default: null,
+      type: cc.Node
+    },
     coinsLabel: {
       default: null,
       type: cc.Label,
@@ -209,7 +217,33 @@ cc.Class({
   },
   fullScreenButton: cc.Button,
   normalScreen: cc.SpriteFrame,
-  fullScreenSprite : cc.SpriteFrame
+  fullScreenSprite : cc.SpriteFrame,
+  starAnimationBottom: {
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationTop:{
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationMobileBottom: {
+    default: null,
+    type: cc.Node,
+  },
+  starAnimationMobileTop:{
+    default: null,
+    type: cc.Node,
+  },
+  nextArrowNode:{
+    default: null,
+    type: cc.Node
+  },
+  previousArrowNode: {
+    default: null,
+    type: cc.Node
+  },
+  nextArrowPostion: null,
+  preiousArrowPosition: null, 
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -222,6 +256,8 @@ cc.Class({
   //     this.scaleAllNodes(this.node, 1.1); // Pass the root node and scale factor
   // }
 
+    this.nextArrowPostion = this.nextArrowNode.getPosition();
+    this.preiousArrowPosition = this.previousArrowNode.getPosition();
     this.activeInputField = null; 
     this.setupLobbyInputFocusListeners();
     this.setupLobbyKeyboardButtonListeners();
@@ -246,9 +282,18 @@ cc.Class({
     this.getUserDetails();
     this.fetchGames(this.category);
     this.currentPage = 0;
+    this.currentNext = 0;
     this.schedule(this.autoScrollPageView, this.scrollInterval);
     // this.setUpPageviewEvent();
     this.rotationSpeed = 180;
+    if(cc.sys.isMobile){
+      this.starScalingAnimation(this.starAnimationMobileBottom);
+      this.starScalingAnimation(this.starAnimationMobileTop);
+    }else{
+      this.starScalingAnimation(this.starAnimationBottom);
+      this.starScalingAnimation(this.starAnimationTop);
+    }
+    
   },
 
   // setUpPageviewEvent: function(){
@@ -283,13 +328,12 @@ cc.Class({
       let pageViewContent = this.pageView.content;
       pageViewContent.removeAllChildren();
     }
-    
     this.pageViewParent.active = false;
     this.mobilePageViewParent.active = false
     this.scrollView.node.setPosition(this.initialPosition);
     this.mobilePageViewParent.setPosition(this.initialmobilePosition)
     this.scrollView.node.getChildByName("view").width = 1600;
-    this.scrollView.node.width = 1500;
+    this.scrollView.node.width = 470;
     var address = K.ServerAddress.ipAddress + K.ServerAPI.game + "=" + gameCategory;
     ServerCom.httpRequest("GET", address, " ", function (response) {
       if(!response.featured && !response.others){
@@ -750,7 +794,11 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
   },
   // close all popup
   closePopupBtn: function () {
+    let inst = this
     if (this.passwordNode.active || this.profileNode.active || this.settingNode.active || this.logoutNode.active) {
+      inst.oldPassword.string == " ";
+      inst.newPassword.string == " ";
+      inst.confirmPassword.string == " ";
       this.passwordNode.active = false;
       this.profileNode.active = false;
       this.settingNode.active = false;
@@ -767,46 +815,140 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
 
   setFullScreenWidth() {
     const screenWidth = cc.winSize.width;
+    var w = window.innerWidth;
+    // console.log(screenWidth, w);
+    // console.log(document.body.offsetWidth);
+   
     if(!document.fullscreenElement){
-      if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
-          this.scrollView.node.width = screenWidth;
-          this.scrollView.node.getChildByName("view").width = screenWidth + 344;
-          this.scrollView.node.setPosition(cc.v2(-1090, 100));
+      if(w >= 1920){
+        this.profileRightNode.setPosition(cc.v2(711, -6));
+        this.profileLeftNode.setPosition(cc.v2(-760, 0))
       }else{
-        if(this.mobilePageViewParent.active){
-          // console.log("this.mobilePageViewParent", this.mobilePageViewParent);
-        }
-        this.scrollView.node.width = screenWidth - 200;
-        this.scrollView.node.getChildByName("view").width = screenWidth - 200;
+          this.profileRightNode.setPosition(cc.v2(600, -6));
+          this.profileLeftNode.setPosition(cc.v2(-630, 0))    
+      }
+      if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
+          // this.scrollView.node.width = screenWidth;
+          this.scrollView.node.getChildByName("view").width = screenWidth;
+          console.log(this.scrollView.node.getChildByName("view").getChildByName("content"));
+          this.scrollView.node.setPosition(cc.v2(-1000, 100));
+      }else{
+        // this.scrollView.node.width = 1700
+        this.scrollView.node.getChildByName("view").width = 1500;
         this.scrollView.node.setPosition(cc.v2(-570, 100));
         this.pageView.node.width = 344;
         this.mobilePageView.node.width = 409;
       }
+      this.nextArrowNode.setPosition(1030, 95);
+      this.previousArrowNode.setPosition(-1000, 95);
      
     } else{      
+      if(w >= 1920){ 
+        this.profileRightNode.setPosition(cc.v2(600, -6));
+        this.profileLeftNode.setPosition(cc.v2(-630, 0))
+      }else{
+          this.profileRightNode.setPosition(cc.v2(600, -6));
+          this.profileLeftNode.setPosition(cc.v2(-630, 0))
+      }
         if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
           if(cc.sys.isMobile){
-            this.scrollView.node.width = screenWidth;
-            this.scrollView.node.getChildByName("view").width = screenWidth + 344;
+            // this.scrollView.node.width = screenWidth;
+            this.scrollView.node.getChildByName("view").width = screenWidth;
             this.scrollView.node.setPosition(cc.v2(-1100, 100));
           }else{
-            this.scrollView.node.width = screenWidth;
-            this.scrollView.node.getChildByName("view").width = screenWidth;
-            this.scrollView.node.setPosition(cc.v2(-980, 100));
+            // this.scrollView.node.width = screenWidth;
+            this.scrollView.node.getChildByName("view").width = screenWidth - 100;
+            this.scrollView.node.setPosition(cc.v2(-900, 100));
           }
-          
         }else{
           if(this.mobilePageViewParent.active){
           }
           this.pageView.node.width = 344;
           this.mobilePageView.node.width = 409;
           const screenWidth = cc.winSize.width - 344;
-          this.scrollView.node.width = screenWidth;
-          this.scrollView.node.getChildByName("view").width = screenWidth;
+          // this.scrollView.node.width = screenWidth;
+          // this.scrollView.node.getChildByName("view").width = screenWidth;
           this.scrollView.node.setPosition(cc.v2(-570, 100));
         }
+        this.nextArrowNode.setPosition(this.nextArrowPostion);
+        this.previousArrowNode.setPosition(this.preiousArrowPosition)
     }
    },
+   // Staranimation to scale and rotate contiously
+   starScalingAnimation: function(targetNode){
+      targetNode.setScale(0.5);
+      targetNode.setRotation(0)
+      cc.tween(targetNode)
+      .parallel(
+        cc.tween().to(1, { scale: 2 }).to(1, { scale: 0.5 }), // Scale up and down
+        cc.tween().by(2, { angle: 360 }) // Rotate continuously
+      )
+      .union()
+      .repeatForever()
+      .start()
+   },
+
+//   setFullScreenWidth() {
+//     const screenWidth = cc.winSize.width;
+//     const windowWidth = window.innerWidth;
+//     const isFullscreen = document.fullscreenElement;
+//     const isWideScreen = windowWidth >= 1920;
+
+//     // Set profile positions based on screen width
+//     const profileRightPosition = isWideScreen ? cc.v2(711, -6) : cc.v2(600, -6);
+//     const profileLeftPosition = isWideScreen ? cc.v2(-730, 0) : cc.v2(-630, 0);
+    
+//     this.profileRightNode.setPosition(profileRightPosition);
+//     this.profileLeftNode.setPosition(profileLeftPosition);
+
+//     // Determine scrollView and view widths and positions
+//     if (!this.pageViewParent.active && !this.mobilePageViewParent.active) {
+//         const adjustedWidth = isFullscreen && !cc.sys.isMobile ? screenWidth : screenWidth - 200;
+//         const viewWidth = adjustedWidth + 344;
+//         const positionX = isFullscreen && !cc.sys.isMobile ? -1100 : -570;
+        
+//         this.scrollView.node.width = adjustedWidth;
+//         this.scrollView.node.getChildByName("view").width = viewWidth;
+//         this.scrollView.node.setPosition(cc.v2(positionX, 100));
+//     } else {
+//         const pageWidth = 344;
+//         const mobilePageWidth = 409;
+//         const adjustedWidth = screenWidth - pageWidth;
+        
+//         this.pageView.node.width = pageWidth;
+//         this.mobilePageView.node.width = mobilePageWidth;
+//         this.scrollView.node.width = adjustedWidth;
+//         this.scrollView.node.getChildByName("view").width = adjustedWidth;
+//         this.scrollView.node.setPosition(cc.v2(-570, 100));
+//     }
+// },
+
+   nextArrowClick: function(){
+    let inst = this
+    let content, targetPos
+    content = this.scrollView.content;
+    let totalPageCount = content.childrenCount;
+    this.currentNext = (this.currentNext + 1) % totalPageCount;
+    console.log(this.currentNext, "currentNext", this.scrollView.node.width);
+    targetPos = cc.v2(this.currentNext * this.scrollView.node.width, 0);
+    console.log(targetPos, "targetPostargetPostargetPos");
+    if(targetPos >= 2000){
+      return
+    }
+    inst.scrollView.scrollToOffset(targetPos, 0.7)
+   },
+   previousArrowClick: function(){
+    let inst = this
+    let content, targetPos
+    content = this.scrollView.content;
+    let totalPageCount = content.childrenCount;
+    console.log('totalPageCount0', totalPageCount);
+    this.currentNext = (this.currentNext - 1) % totalPageCount;
+    console.log(this.currentNext, "currentNext", this.scrollView.node.width);
+    targetPos = cc.v2(this.currentNext * this.scrollView.node.width, 0);
+    inst.scrollView.scrollToOffset(targetPos, 0.7)
+   },
+
    // Auto Scroll 
    autoScrollPageView() {
     let content, targetPos;

@@ -31,8 +31,8 @@ cc.Class({
         this.currentVolume = newProgress;
         
         // Optionally, update the actual volume in your audio settings here
-        if (cc.game.loginAudioID !== undefined) {
-            cc.audioEngine.setVolume(cc.game.loginAudioID, volume);
-        }
+        // if (cc.game.loginAudioID !== undefined) {
+        //     cc.audioEngine.setVolume(cc.game.loginAudioID, volume);
+        // }
     }
 });
