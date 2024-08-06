@@ -233,7 +233,17 @@ cc.Class({
   starAnimationMobileTop:{
     default: null,
     type: cc.Node,
-  }
+  },
+  nextArrowNode:{
+    default: null,
+    type: cc.Node
+  },
+  previousArrowNode: {
+    default: null,
+    type: cc.Node
+  },
+  nextArrowPostion: null,
+  preiousArrowPosition: null, 
   },
 
   // LIFE-CYCLE CALLBACKS:
@@ -246,6 +256,8 @@ cc.Class({
   //     this.scaleAllNodes(this.node, 1.1); // Pass the root node and scale factor
   // }
 
+    this.nextArrowPostion = this.nextArrowNode.getPosition();
+    this.preiousArrowPosition = this.previousArrowNode.getPosition();
     this.activeInputField = null; 
     this.setupLobbyInputFocusListeners();
     this.setupLobbyKeyboardButtonListeners();
@@ -270,6 +282,7 @@ cc.Class({
     this.getUserDetails();
     this.fetchGames(this.category);
     this.currentPage = 0;
+    this.currentNext = 0;
     this.schedule(this.autoScrollPageView, this.scrollInterval);
     // this.setUpPageviewEvent();
     this.rotationSpeed = 180;
@@ -315,13 +328,12 @@ cc.Class({
       let pageViewContent = this.pageView.content;
       pageViewContent.removeAllChildren();
     }
-    
     this.pageViewParent.active = false;
     this.mobilePageViewParent.active = false
     this.scrollView.node.setPosition(this.initialPosition);
     this.mobilePageViewParent.setPosition(this.initialmobilePosition)
     this.scrollView.node.getChildByName("view").width = 1600;
-    this.scrollView.node.width = 1500;
+    this.scrollView.node.width = 470;
     var address = K.ServerAddress.ipAddress + K.ServerAPI.game + "=" + gameCategory;
     ServerCom.httpRequest("GET", address, " ", function (response) {
       if(!response.featured && !response.others){
@@ -806,7 +818,7 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
     var w = window.innerWidth;
     // console.log(screenWidth, w);
     // console.log(document.body.offsetWidth);
-    
+   
     if(!document.fullscreenElement){
       if(w >= 1920){
         this.profileRightNode.setPosition(cc.v2(711, -6));
@@ -816,19 +828,19 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           this.profileLeftNode.setPosition(cc.v2(-630, 0))    
       }
       if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
-          this.scrollView.node.width = screenWidth;
-          this.scrollView.node.getChildByName("view").width = screenWidth + 344;
-          this.scrollView.node.setPosition(cc.v2(-1090, 100));
+          // this.scrollView.node.width = screenWidth;
+          this.scrollView.node.getChildByName("view").width = screenWidth;
+          console.log(this.scrollView.node.getChildByName("view").getChildByName("content"));
+          this.scrollView.node.setPosition(cc.v2(-1000, 100));
       }else{
-        if(this.mobilePageViewParent.active){
-          // console.log("this.mobilePageViewParent", this.mobilePageViewParent);
-        }
-        this.scrollView.node.width = screenWidth - 200;
-        this.scrollView.node.getChildByName("view").width = screenWidth - 200;
+        // this.scrollView.node.width = 1700
+        this.scrollView.node.getChildByName("view").width = 1500;
         this.scrollView.node.setPosition(cc.v2(-570, 100));
         this.pageView.node.width = 344;
         this.mobilePageView.node.width = 409;
       }
+      this.nextArrowNode.setPosition(1030, 95);
+      this.previousArrowNode.setPosition(-1000, 95);
      
     } else{      
       if(w >= 1920){ 
@@ -840,13 +852,13 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
       }
         if(!this.pageViewParent.active && !this.mobilePageViewParent.active){
           if(cc.sys.isMobile){
-            this.scrollView.node.width = screenWidth;
-            this.scrollView.node.getChildByName("view").width = screenWidth + 344;
+            // this.scrollView.node.width = screenWidth;
+            this.scrollView.node.getChildByName("view").width = screenWidth;
             this.scrollView.node.setPosition(cc.v2(-1100, 100));
           }else{
-            this.scrollView.node.width = screenWidth;
-            this.scrollView.node.getChildByName("view").width = screenWidth;
-            this.scrollView.node.setPosition(cc.v2(-980, 100));
+            // this.scrollView.node.width = screenWidth;
+            this.scrollView.node.getChildByName("view").width = screenWidth - 100;
+            this.scrollView.node.setPosition(cc.v2(-900, 100));
           }
         }else{
           if(this.mobilePageViewParent.active){
@@ -854,10 +866,12 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
           this.pageView.node.width = 344;
           this.mobilePageView.node.width = 409;
           const screenWidth = cc.winSize.width - 344;
-          this.scrollView.node.width = screenWidth;
-          this.scrollView.node.getChildByName("view").width = screenWidth;
+          // this.scrollView.node.width = screenWidth;
+          // this.scrollView.node.getChildByName("view").width = screenWidth;
           this.scrollView.node.setPosition(cc.v2(-570, 100));
         }
+        this.nextArrowNode.setPosition(this.nextArrowPostion);
+        this.previousArrowNode.setPosition(this.preiousArrowPosition)
     }
    },
    // Staranimation to scale and rotate contiously
@@ -908,6 +922,32 @@ populateItems: function(itemData, prefab, parent, gameCategory) {
 //         this.scrollView.node.setPosition(cc.v2(-570, 100));
 //     }
 // },
+
+   nextArrowClick: function(){
+    let inst = this
+    let content, targetPos
+    content = this.scrollView.content;
+    let totalPageCount = content.childrenCount;
+    this.currentNext = (this.currentNext + 1) % totalPageCount;
+    console.log(this.currentNext, "currentNext", this.scrollView.node.width);
+    targetPos = cc.v2(this.currentNext * this.scrollView.node.width, 0);
+    console.log(targetPos, "targetPostargetPostargetPos");
+    if(targetPos >= 2000){
+      return
+    }
+    inst.scrollView.scrollToOffset(targetPos, 0.7)
+   },
+   previousArrowClick: function(){
+    let inst = this
+    let content, targetPos
+    content = this.scrollView.content;
+    let totalPageCount = content.childrenCount;
+    console.log('totalPageCount0', totalPageCount);
+    this.currentNext = (this.currentNext - 1) % totalPageCount;
+    console.log(this.currentNext, "currentNext", this.scrollView.node.width);
+    targetPos = cc.v2(this.currentNext * this.scrollView.node.width, 0);
+    inst.scrollView.scrollToOffset(targetPos, 0.7)
+   },
 
    // Auto Scroll 
    autoScrollPageView() {
